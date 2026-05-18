@@ -35,8 +35,8 @@ Raw slash-command arguments: `$ARGUMENTS`
 
 ## Model selection
 
-- Default model: `gemini-3-pro-preview` (top reasoning).
-- Fallback if 404: `gemini-2.5-pro`.
+- Default model: `gemini-2.5-pro` (stable GA, reliable capacity).
+- For top reasoning critical reviews: pass `--model gemini-3-pro-preview`. Note: preview model frequently returns 429 "No capacity" — if so, retry with default.
 - Override via `--model <name>` in `$ARGUMENTS`.
 
 ## Foreground flow
@@ -47,7 +47,7 @@ Raw slash-command arguments: `$ARGUMENTS`
 2. Pipe diff content to Gemini with structured prompt:
 
 ```bash
-DIFF=$(<diff command>); echo "$DIFF" | gemini -m gemini-3-pro-preview -p "$REVIEW_PROMPT"
+DIFF=$(<diff command>); echo "$DIFF" | gemini -m gemini-2.5-pro -p "$REVIEW_PROMPT"
 ```
 
 3. Review prompt (`$REVIEW_PROMPT`):

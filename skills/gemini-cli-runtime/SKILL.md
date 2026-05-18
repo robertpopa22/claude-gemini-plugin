@@ -22,15 +22,17 @@ CLI `-m` flag accepts these values:
 | `auto` | Auto | Default Gemini 3 routing (recommended starting point) |
 | `gemini-3` | Auto | Auto Gemini 3 routing |
 | `gemini-2.5` | Auto | Auto Gemini 2.5 routing |
-| `gemini-3-pro-preview` | Pro | **Recommended default** — top reasoning, 1M context |
+| `gemini-3-pro-preview` | Pro | Top reasoning, but preview tier — frequent 429 "no capacity" under OAuth free tier. Use for short critical reviews; fall back to gemini-2.5-pro on 429. |
 | `gemini-3-flash-preview` | Flash | Fast, lower cost |
 | `gemini-2.5-pro` | Pro | Stable GA |
 | `gemini-2.5-flash` | Flash | Stable GA fast |
 
 **Notes**:
-- `gemini-3.1-pro` is the **release name**, NOT a valid CLI slug — using it gives 404.
-- Model availability depends on auth tier — OAuth (Code Assist) free tier may not include all preview models. If `gemini-3-pro-preview` fails with 404, fall back to `auto` or `gemini-2.5-pro`.
+- `gemini-3.1-pro` is the **release name**, NOT a valid CLI slug — using it gives 404. The CLI auto-maps `gemini-3-pro-preview` to `gemini-3.1-pro-preview` internally as of v0.42.0.
+- Model availability depends on auth tier — OAuth (Code Assist) free tier preview models frequently return **429 "No capacity available"** under load. Default to `gemini-2.5-pro` (stable GA) for reliability; use `gemini-3-pro-preview` for short critical reviews when quota allows.
 - Pricing only applies to paid API key auth. OAuth has quota limits (60 req/min, 1000/day) but no per-token billing.
+
+**Recommended default**: `gemini-2.5-pro` (reliable). Override with `-m gemini-3-pro-preview` for top reasoning when needed.
 
 ## Sandbox & approval modes
 
@@ -76,25 +78,32 @@ gemini -m gemini-3-pro-preview --approval-mode plan -p "Review architecture of D
 ### Basic prompt only
 
 ```bash
-gemini -m gemini-3-pro-preview -p "Explain ..."
+gemini -m gemini-2.5-pro -p "Explain ..."
 ```
 
 ### Single-file review (stdin pipe)
 
 ```bash
-cat /path/to/document.md | gemini -m gemini-3-pro-preview -p "Identify top 5 risks"
+cat /path/to/document.md | gemini -m gemini-2.5-pro -p "Identify top 5 risks"
 ```
 
 ### Multi-file review (stdin pipe)
 
 ```bash
-cat file1.py file2.py file3.py | gemini -m gemini-3-pro-preview -p "Audit for race conditions"
+cat file1.py file2.py file3.py | gemini -m gemini-2.5-pro -p "Audit for race conditions"
 ```
 
 ### Codebase exploration (read-only workspace)
 
 ```bash
-gemini -m gemini-3-pro-preview --approval-mode plan -p "Audit auth flow in this Next.js app"
+gemini -m gemini-2.5-pro --approval-mode plan -p "Audit auth flow in this Next.js app"
+```
+
+### Top reasoning (preview, may 429)
+
+```bash
+cat critical-contract.md | gemini -m gemini-3-pro-preview -p "Adversarial legal review"
+# On 429 "No capacity": retry with gemini-2.5-pro
 ```
 
 ## Error Handling

@@ -49,7 +49,7 @@ For exploratory tasks where read-only is insufficient and the user explicitly OK
 ## Forwarding rules
 
 - Exactly one `Bash` call per request. The Read tool may be used FIRST to read files that will be piped via stdin (Pattern A).
-- Default model: `gemini-3-pro-preview` (highest reasoning, 1M context). Fallback if unavailable: `gemini-2.5-pro` or just `auto`.
+- Default model: `gemini-2.5-pro` (stable GA, 1M context, reliable capacity). Use `gemini-3-pro-preview` for top reasoning when explicitly requested and quota allows — preview models can return 429 "no capacity" under load.
 - If user specifies a different model, pass it through with `-m`.
 - Preserve user's task text as-is apart from stripping routing flags.
 - Return stdout exactly as-is. No commentary before or after.

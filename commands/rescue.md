@@ -1,5 +1,5 @@
 ---
-description: Delegate task to Google Gemini (default gemini-3-pro-preview, 1M context). For diagnosis, review, contra-opinie, or document analysis where Gemini's long context or alternative reasoning helps.
+description: Delegate task to Google Gemini (default gemini-2.5-pro, 1M context). For diagnosis, review, contra-opinie, or document analysis where Gemini's long context or alternative reasoning helps. Override with -m gemini-3-pro-preview for top reasoning.
 argument-hint: <task description, optionally with file paths>
 ---
 
