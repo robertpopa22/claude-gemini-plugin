@@ -1,0 +1,11 @@
+{
+  "name": "gemini",
+  "version": "0.1.0",
+  "description": "Use Google Gemini from Claude Code to review code, contra-opinie pe arhitectura/contracte juridice, sau delegate tasks cu context 1M tokens.",
+  "author": {
+    "name": "Geseidl IT Solutions",
+    "url": "https://geseidl.ro/servicii-it"
+  },
+  "homepage": "https://github.com/robertpopa22/claude-gemini-plugin",
+  "license": "MIT"
+}
