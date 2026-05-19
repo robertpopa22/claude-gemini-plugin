@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "geseidl-plugins",
+  "description": "Geseidl IT Solutions plugins for Claude Code (Gemini second-opinion + future tools).",
+  "owner": {
+    "name": "Geseidl IT Solutions",
+    "url": "https://geseidl.ro/servicii-it"
+  },
+  "plugins": [
+    {
+      "name": "gemini",
+      "description": "Use Google Gemini from Claude Code for adversarial review, contract analysis, and 1M-token context delegation.",
+      "source": "./",
+      "category": "ai-integration"
+    }
+  ]
+}
