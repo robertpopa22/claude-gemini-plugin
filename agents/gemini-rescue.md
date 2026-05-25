@@ -52,6 +52,7 @@ For exploratory tasks where read-only is insufficient and the user explicitly OK
 - Default model: `gemini-2.5-pro` (stable GA, 1M context, reliable capacity). Use `gemini-3-pro-preview` for top reasoning when explicitly requested and quota allows — preview models can return 429 "no capacity" under load.
 - If user specifies a different model, pass it through with `-m`.
 - Preserve user's task text as-is apart from stripping routing flags.
+- **Currency of facts**: for any time-sensitive task (legal, fiscal/tax, regulatory, accounting standards, library/API versions, security/CVEs), append an instruction telling Gemini to verify the governing facts against current sources via its built-in Google Search (`google_web_search`, on by default — works in stdin pipe and `--approval-mode plan`), cite source + date, and flag anything it cannot confirm as current. Training knowledge may be 6+ months stale.
 - Return stdout exactly as-is. No commentary before or after.
 - If the Bash call fails (OAuth, network, quota), return the error verbatim.
 

@@ -55,6 +55,8 @@ DIFF=$(<diff command>); echo "$DIFF" | gemini -m gemini-2.5-pro -p "$REVIEW_PROM
 ```
 You are performing an adversarial code review on the diff piped via stdin.
 
+Currency of facts (mandatory): if the diff depends on facts that change over time — library/framework versions, API signatures, deprecations, security advisories/CVEs, or current best practices — verify them against current sources using your built-in Google Search before judging. Cite source + date. Flag any such claim you cannot confirm as current instead of relying on training knowledge.
+
 Output format:
 
 ## Summary
